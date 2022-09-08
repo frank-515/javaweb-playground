@@ -21,6 +21,8 @@
                 <br>
                 <el-button v-on:click="postInfo">Submit</el-button>
                 <el-button v-on:click="reset">Reset</el-button>
+                <br>
+                <el-button v-on:click="reg">Register</el-button>
             </div>
 
 
@@ -48,6 +50,27 @@
                 })
                     .then(function (response) {
                         console.log(response)
+                        if (response.data === true) {
+                            alert("Successfully login.")
+                        } else {
+                            alert("Bad username or password -" + response.data)
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        alert(error)
+                    })
+            },
+            reg() {
+                axios.post('/playground/register', {
+                    username: this.username,
+                    password: this.password
+                })
+                    .then(function (response) {
+                        console.log(response)
+                        if (response.data === true) {
+                            alert("Successfully registered.")
+                        }
                     })
                     .catch(function (error) {
                         console.log(error)
