@@ -1,5 +1,5 @@
 package pojo;
-
+import util.shaDigest;
 public class User {
     private String username;
     private String password;

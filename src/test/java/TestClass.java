@@ -13,10 +13,6 @@ public class TestClass {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("MyBatisCfg.xml"));
         var session = factory.openSession();
         var userDAO = session.getMapper(UserMapper.class);
-        userDAO.insertUser(new User("frank", "515"));
-        userDAO.insertUser(new User("frank2", "515"));
-        session.commit();
-        System.out.println("Done.");
 
     }
 

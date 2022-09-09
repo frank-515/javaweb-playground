@@ -7,35 +7,60 @@
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
     <!-- import JavaScript -->
     <script src="https://unpkg.com/element-plus"></script>
-    <title>Login demo</title>
+    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Login demo</title>
 </head>
-<body>
-<h1> Login Page. </h1>
+
+<style type="text/css">
+    .background{
+        background-image: url("background1.png");
+        background-size: 100%, 100%;
+    }
+</style>
+
+<body class="background">
+
 <div id="app">
+
+
     <el-container>
-        <el-form>
-            <el-input placeholder="Username" v-model="username"></el-input><br><br>
-            <el-input placeholder="Password" type="password" v-model="password"></el-input><br><br>
-            <div>
-                <br>
-                <el-button v-on:click="postInfo">Submit</el-button>
-                <el-button v-on:click="reset">Reset</el-button>
-                <br>
-                <el-button v-on:click="reg">Register</el-button>
-            </div>
+
+        <el-dialog v-model="dialogOn"
+                   width="30%"
+                   title="Login"
+                   show-close="false"
+                   center="true"
+                   before-close="function(){return void(0)}"
+                   modal="false">
+            <el-form>
+                <el-input placeholder="Username" v-model="username"></el-input><br><br>
+                <el-input placeholder="Password" type="password" v-model="password"></el-input><br><br>
+                <div>
+                    <el-row>
+                        <el-button v-on:click="reset">Reset</el-button>
+                        <el-button v-on:click="reg">Register</el-button>
+                        <el-button v-on:click="postInfo" type="primary"> > </el-button>
+
+                    </el-row>
+
+                </div>
+            </el-form>
+        </el-dialog>
 
 
-        </el-form>
     </el-container>
 </div>
 </body>
 <script>
+
     const App = {
         data() {
             return {
                 username: "",
-                password: ""
+                password: "",
+                dialogOn: true
             };
         },
         methods: {
@@ -53,7 +78,7 @@
                         if (response.data === true) {
                             alert("Successfully login.")
                         } else {
-                            alert("Bad username or password -" + response.data)
+                            alert("Bad username or password.")
                         }
                     })
                     .catch(function (error) {
@@ -83,6 +108,8 @@
     };
     const app = Vue.createApp(App);
     app.use(ElementPlus);
+
+
     app.mount("#app");
 
 </script>
