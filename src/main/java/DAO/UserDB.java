@@ -24,13 +24,15 @@ public class UserDB {
         session.close();
         return userInDB.getPassword().equals(user.getPassword());
     }
-    public static void addUser(User user) throws IOException {
+    public static boolean addUser(User user) throws IOException {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("MyBatisCfg.xml"));
         var session = factory.openSession();
         var userDAO = session.getMapper(UserMapper.class);
         var userInDB = userDAO.getUserByUsername(user.getUsername());
+        if (userInDB != null) return false;
         userDAO.insertUser(user);
         session.commit();
         session.close();
+        return true;
     }
 }

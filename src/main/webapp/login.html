@@ -70,6 +70,8 @@
                         console.log(response)
                         if (response.data === true) {
                             alert("Successfully registered.")
+                        } else if (response.data === false) {
+                            alert("Failed to register.")
                         }
                     })
                     .catch(function (error) {

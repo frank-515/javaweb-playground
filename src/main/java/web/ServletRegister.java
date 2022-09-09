@@ -24,8 +24,13 @@ public class ServletRegister extends HttpServlet {
         InputStream is = request.getInputStream();
         String userJson = new String(is.readAllBytes(), StandardCharsets.UTF_8);
         var user = JSON.parseObject(userJson, User.class);
-        UserDB.addUser(user);
         response.setStatus(200);
-        response.getWriter().println("true");
+        if (UserDB.addUser(user)) {
+            response.getWriter().println(true);
+        } else {
+            response.getWriter().println(false);
+        }
+
+
     }
 }
