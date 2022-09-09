@@ -32,6 +32,9 @@ public class ServletLogin extends HttpServlet {
         InputStream is = request.getInputStream();
         String userJson = new String(is.readAllBytes(), StandardCharsets.UTF_8);
         var user = JSON.parseObject(userJson, User.class);
+        System.out.println(user.getPassword());
+        user.setPassword(user.getPassword());
+        System.out.println(user.getPassword());
         var loginStat = UserDB.login(user);
         response.setStatus(200);
         response.getWriter().println(loginStat);
