@@ -5,7 +5,9 @@
     <script src="https://unpkg.com/vue@next"></script>
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <link rel="stylesheet" href="css/util.css">
     <!-- import JavaScript -->
+    <script src="js/util.js"></script>
     <script src="https://unpkg.com/element-plus"></script>
     <script src="https://unpkg.com/@element-plus/icons-vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -15,14 +17,14 @@
 
 <style type="text/css">
     .background{
-        background-image: url("background1.png");
+        background-image: url("img/background1.png");
         background-size: 100%, 100%;
     }
 </style>
 
 <body class="background">
 
-<div id="app">
+<div id="app" class="main">
 
 
     <el-container>
@@ -54,7 +56,7 @@
 </div>
 </body>
 <script>
-
+    var _username;
     const App = {
         data() {
             return {
@@ -69,6 +71,7 @@
                 this.password = "";
             },
             postInfo() {
+                _username = this.username;
                 axios.post('/playground/login', {
                     username: this.username,
                     password: this.password
@@ -76,7 +79,9 @@
                     .then(function (response) {
                         console.log(response)
                         if (response.data === true) {
-                            alert("Successfully login.")
+                            // alert("Successfully login.")
+                            setCookie("username", _username, 1)
+                            document.location.href = '/playground/home.html';
                         } else {
                             alert("Bad username or password.")
                         }

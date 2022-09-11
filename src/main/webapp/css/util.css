@@ -1,0 +1,7 @@
+@font-face {
+    font-family: BreeSerif;
+    src: url('../font/BreeSerif-Regular.ttf');
+}
+.main {
+    font-family: BreeSerif, serif;
+}
