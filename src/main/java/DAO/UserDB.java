@@ -11,7 +11,6 @@ public class UserDB {
     //Connect to DB
 
 
-
     public static boolean login(User user) throws IOException {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("MyBatisCfg.xml"));
         var session = factory.openSession();
@@ -24,6 +23,7 @@ public class UserDB {
         session.close();
         return userInDB.getPassword().equals(user.getPassword());
     }
+
     public static boolean addUser(User user) throws IOException {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("MyBatisCfg.xml"));
         var session = factory.openSession();

@@ -1,6 +1,7 @@
 package DAO;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
 import pojo.User;
 import org.apache.ibatis.annotations.Select;
 
@@ -11,4 +12,5 @@ public interface UserMapper {
 
     @Select("select * from loginDB where username = #{username}")
     User getUserByUsername(String username);
+
 }

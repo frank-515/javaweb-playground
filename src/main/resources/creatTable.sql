@@ -1,6 +1,7 @@
 use loginDB;
 
-show tables ;
+
+drop table loginDB;
 
 create table loginDB (
                            userId INT UNSIGNED AUTO_INCREMENT,
@@ -9,4 +10,3 @@ create table loginDB (
                            primary key (userId)
 ) charset=utf8;
 
-drop table loginDB;

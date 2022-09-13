@@ -22,8 +22,17 @@ import java.util.Map;
 public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setStatus(403);
-        response.getWriter().println("<br> <h1> Get method is not support. </h1>");
+        var cookies = request.getCookies();
+        String username = null, password = null;
+        for (var cookie : cookies) {
+            switch (cookie.getName()) {
+                case "username" -> username = cookie.getValue();
+                case "password" -> password = cookie.getValue();
+            }
+        }
+        User user = new User(username, password);
+        user.setPassword(user.getPassword());
+        ServletVerifyUser.verify(request, response, username, password, user);
     }
 
     @Override
@@ -32,9 +41,7 @@ public class ServletLogin extends HttpServlet {
         InputStream is = request.getInputStream();
         String userJson = new String(is.readAllBytes(), StandardCharsets.UTF_8);
         var user = JSON.parseObject(userJson, User.class);
-        System.out.println(user.getPassword());
         user.setPassword(user.getPassword());
-        System.out.println(user.getPassword());
         var loginStat = UserDB.login(user);
         response.setStatus(200);
         response.getWriter().println(loginStat);

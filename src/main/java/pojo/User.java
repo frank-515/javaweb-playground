@@ -17,7 +17,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = shaDigest.toSHA(password + username);
+        this.password = shaDigest.toSHA(password + this.username);
     }
 
     public User(String username, String password) {

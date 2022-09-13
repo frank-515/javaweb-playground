@@ -57,6 +57,7 @@
 </body>
 <script>
     var _username;
+    var _password;
     const App = {
         data() {
             return {
@@ -72,6 +73,7 @@
             },
             postInfo() {
                 _username = this.username;
+                _password = this.password;
                 axios.post('/playground/login', {
                     username: this.username,
                     password: this.password
@@ -81,6 +83,7 @@
                         if (response.data === true) {
                             // alert("Successfully login.")
                             setCookie("username", _username, 1)
+                            setCookie("password", _password, 1)
                             document.location.href = '/playground/home.html';
                         } else {
                             alert("Bad username or password.")
